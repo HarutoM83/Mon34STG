@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Shot : MonoBehaviour
 {
-
     public GameObject bullet;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -19,8 +18,22 @@ public class Shot : MonoBehaviour
 
     public void BulletShot()
     {
+        //GameObject obj = bullet;
         Vector3 bulletPosition = new Vector3(0, 0, 0);
         Quaternion bulletRotation = Quaternion.Euler(0, 0, 90); // Šp“x‚ð•ÏŠ·
         Instantiate(bullet, this.transform.position, bulletRotation);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Wall"))
+        {
+            Kill();
+        }
+    }
+
+    void Kill()
+    {
+        Destroy(bullet);
     }
 }
